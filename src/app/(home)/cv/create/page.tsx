@@ -16,7 +16,7 @@ export default function CreateCVPage(){
                 className='w-full flex gap-8 justify-center'
             >
                 <Link
-                    href={'/cv/elements/create'}
+                    href={'/elements/create'}
                 >
                     <Button>
                         Create elements

@@ -1,14 +1,16 @@
 import { ComponentProps } from 'react'
 
-// interface IInputTextProps extends ComponentProps<'input'> {}
+interface IInputTextProps extends ComponentProps<'input'> {
+    name: string
+}
 
 export default function InputText({
     ...props
-}: ComponentProps<'input'> ){
+}: IInputTextProps ){
 
     return <input
         {...props}
-        type='text'
+        key={props.name}
         className={`bg-blue-800 w-full p-2 rounded-md text-left ${props.className}`}
     />
 

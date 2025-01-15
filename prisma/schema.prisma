@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id        String   @id @default(uuid()) @db.Uuid
+    name      String
+    email     String   @unique
+    password  String
+    createdAt DateTime @default(now()) @map("created_at")
+
+    cv_element_personalInformation Cv_element_personalInformation[]
+    cv_element_aboutMe             Cv_element_aboutMe[]
+    cv_element_experience          Cv_element_experience[]
+    cv_element_education           Cv_element_education[]
+}
+
+model Cv_element_personalInformation {
+    id     String @id @default(uuid()) @db.Uuid
+    userId String @map("user_id") @db.Uuid
+
+    customId    String @map("custom_id")
+    name        String
+    jobTitle    String @map("job_title")
+    location    String
+    email       String
+    phoneNumber String @map("phone_number")
+    linkedin    String
+    github      String
+    website     String
+
+    user User @relation(fields: [userId], references: [id])
+}
+
+model Cv_element_aboutMe {
+    id     String @id @default(uuid()) @db.Uuid
+    userId String @map("user_id") @db.Uuid
+
+    customId    String @map("custom_id")
+    description String
+
+    user User @relation(fields: [userId], references: [id])
+}
+
+model Cv_element_experience {
+    id     String @id @default(uuid()) @db.Uuid
+    userId String @map("user_id") @db.Uuid
+
+    customId     String   @map("custom_id")
+    name         String
+    startPeriod  DateTime @map("start_period")
+    finishPeriod DateTime @map("finish_period")
+    location     String
+    description  String
+
+    user User @relation(fields: [userId], references: [id])
+}
+
+model Cv_element_education {
+    id     String @id @default(uuid()) @db.Uuid
+    userId String @map("user_id") @db.Uuid
+
+    customId     String   @map("custom_id")
+    name         String
+    startPeriod  DateTime @map("start_period")
+    finishPeriod DateTime @map("finish_period")
+    location     String
+    description  String
+
+    user User @relation(fields: [userId], references: [id])
+}

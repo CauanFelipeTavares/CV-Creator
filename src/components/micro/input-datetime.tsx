@@ -1,10 +1,12 @@
 import { ComponentProps } from 'react'
 
-// interface IInputTextProps extends ComponentProps<'input'> {}
+interface IDatetimeProps extends ComponentProps<'input'> {
+    name: string
+}
 
 export default function Datetime({
     ...props
-}: ComponentProps<'input'> ){
+}: IDatetimeProps ){
 
     return <input
         {...props}
