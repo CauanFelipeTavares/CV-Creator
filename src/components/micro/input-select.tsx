@@ -15,7 +15,7 @@ export default function Select({
 
     return <select
         {...props}
-        className={`bg-blue-800 w-full p-2 rounded-md text-left ${props.className}`}
+        className={`bg-secundary w-full p-2 rounded-md text-left border-primary border-2 ${props.className}`}
     >
         {
             options.map(opt => <option

@@ -8,7 +8,7 @@ export default function Button({
 
     return <button
         {...props}
-        className={`px-10 py-1.5 border-2 rounded-md bg-blue-800 hover:bg-blue-900 disabled:cursor-not-allowed disabled:opacity-50 ${props.className}`}
+        className={`px-10 py-1.5 border-primary border-2 rounded-md bg-secundary hover:bg-thirth disabled:cursor-not-allowed disabled:opacity-50 ${props.className}`}
     />
 
 }

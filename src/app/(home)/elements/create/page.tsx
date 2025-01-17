@@ -1,5 +1,5 @@
 import { submitAction } from './_actions'
-import ElementForm from './_components/ElementForm'
+import ElementForm from './CreateElementForm'
 
 export default function CreateCVElementPage(){
 

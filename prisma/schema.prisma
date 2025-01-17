@@ -14,11 +14,11 @@ datasource db {
 }
 
 model User {
-    id        String   @id @default(uuid()) @db.Uuid
+    id        String    @id @default(uuid()) @db.Uuid
     name      String
-    email     String   @unique
+    email     String    @unique
     password  String
-    createdAt DateTime @default(now()) @map("created_at")
+    createdAt DateTime? @default(now()) @map("created_at")
 
     cv_element_personalInformation Cv_element_personalInformation[]
     cv_element_aboutMe             Cv_element_aboutMe[]
@@ -30,15 +30,15 @@ model Cv_element_personalInformation {
     id     String @id @default(uuid()) @db.Uuid
     userId String @map("user_id") @db.Uuid
 
-    customId    String @map("custom_id")
+    customId    String  @map("custom_id")
     name        String
-    jobTitle    String @map("job_title")
+    jobTitle    String  @map("job_title")
     location    String
     email       String
-    phoneNumber String @map("phone_number")
-    linkedin    String
-    github      String
-    website     String
+    phoneNumber String  @map("phone_number")
+    linkedin    String?
+    github      String?
+    website     String?
 
     user User @relation(fields: [userId], references: [id])
 }
@@ -57,10 +57,10 @@ model Cv_element_experience {
     id     String @id @default(uuid()) @db.Uuid
     userId String @map("user_id") @db.Uuid
 
-    customId     String   @map("custom_id")
+    customId     String @map("custom_id")
     name         String
-    startPeriod  DateTime @map("start_period")
-    finishPeriod DateTime @map("finish_period")
+    startPeriod  String @map("start_period")
+    finishPeriod String @map("finish_period")
     location     String
     description  String
 
@@ -71,10 +71,10 @@ model Cv_element_education {
     id     String @id @default(uuid()) @db.Uuid
     userId String @map("user_id") @db.Uuid
 
-    customId     String   @map("custom_id")
+    customId     String @map("custom_id")
     name         String
-    startPeriod  DateTime @map("start_period")
-    finishPeriod DateTime @map("finish_period")
+    startPeriod  String @map("start_period")
+    finishPeriod String @map("finish_period")
     location     String
     description  String
 

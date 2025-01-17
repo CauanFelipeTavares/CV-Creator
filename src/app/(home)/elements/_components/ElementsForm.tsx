@@ -2,87 +2,12 @@
 
 export type ElementOption = 'personalInformation' | 'aboutMe' | 'experience' | 'education'
 
-import Button from '@/components/micro/button'
 import Datetime from '@/components/micro/input-datetime'
-import Select from '@/components/micro/input-select'
 import InputText from '@/components/micro/input-text'
 import Textarea from '@/components/micro/input-textarea'
-import { IActionResponse } from '@/lib/utils/response'
-import { useActionState, useEffect, useRef, useState } from 'react'
 
-type SubmitActionType = (formData: FormData) => Promise<IActionResponse>
-
-export default function ElementForm({
-    submitAction
-}: {
-    submitAction: SubmitActionType
-}){
-
-    const formOptions = {
-        personalInformation: PersonalInformationForm,
-        aboutMe: AboutMeForm,
-        experience: ExperienceForm,
-        education: EducationForm,
-    }
-
-    const [formOpt, setFormOpt] = useState<ElementOption>('personalInformation')
-    const inputData = useRef<any>({})
-
-    const [state, clientSubmitAction, isPending] = useActionState(
-        async (_previousData: any, formData: FormData) => {
-            
-            const response = await submitAction(formData)
+export function AboutMeForm({ inputData }: { inputData: any }){
     
-            return response
-
-        },
-        null,
-    )
-
-    return <>
-        <div
-            className='w-full flex gap-4 mb-4 justify-center'
-        >
-            <div
-                className='flex flex-col w-2/5'
-            >
-                <label
-                    className='text-left'
-                >
-                    Element Type:
-                </label>
-                <Select
-                    name='elementOption'
-                    options={[
-                        { title: 'Personal information', value: 'personalInformation' },
-                        { title: 'About Me', value: 'aboutMe' },
-                        { title: 'Experience', value: 'experience' },
-                        { title: 'Education/Certifications', value: 'education' },
-                    ]}
-                    onChange={(ev) => setFormOpt(ev.target.value as ElementOption)}
-                />
-            </div>
-            <div className='w-2/5' />
-        </div>
-        <form
-            className='flex flex-col gap-8 justify-center mt-8'
-            action={clientSubmitAction}
-        >
-            { formOptions[formOpt](inputData.current) }
-            {state?.status == 'error' && <p className='text-red-600 my-0'>*{state.msg}</p>}
-            <Button
-                className='w-1/4 mt-2 ml-auto mr-[10%]'
-                disabled={isPending}
-            >
-                Create Element
-            </Button>
-        </form>
-    </>
-
-}
-
-function AboutMeForm(inputData: any){
-
     return <>
         <input type='hidden' name='tableId' value='aboutMe' />
         <div
@@ -127,7 +52,7 @@ function AboutMeForm(inputData: any){
 
 }
 
-function PersonalInformationForm(inputData: any){
+export function PersonalInformationForm({ inputData }: { inputData: any }){
 
     return <>
         <input type='hidden' name='tableId' value='personalInformation' />
@@ -295,7 +220,7 @@ function PersonalInformationForm(inputData: any){
 
 }
 
-function ExperienceForm(inputData: any){
+export function ExperienceForm({ inputData }: { inputData: any }){
 
     return <>
         <input type='hidden' name='tableId' value='experience' />
@@ -415,7 +340,7 @@ function ExperienceForm(inputData: any){
 
 }
 
-function EducationForm(inputData: any){
+export function EducationForm({ inputData }: { inputData: any }){
 
     return <>
         <input type='hidden' name='tableId' value='education' />
