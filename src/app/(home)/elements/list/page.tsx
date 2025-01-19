@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/db/prisma"
 import ElementHandleOptionsComponent from "./_components/ElementHandleOptions"
-import { EmptyElementsComponent } from "./_components/ElementResponse"
 import { IActionResponse } from "@/lib/utils/response"
 import { PopupAboutMe, PopupEducation, PopupExperience, PopupPersonalInformation } from "./_components/ElementPopup"
+import EmptyListComponent from "../../_components/EmptyListComponent"
 
 export default async function ElementListPage(){
 
@@ -100,7 +100,9 @@ async function getPersonalInformation(){
         Error to get data
     </p>
 
-    if(response.length === 0) return <EmptyElementsComponent />
+    if(response.length === 0) return <EmptyListComponent>
+        Without Elements
+    </EmptyListComponent>
 
     return response.map(el => <div
         className='flex justify-between w-4/5 pt-4 pb-2 border-b-2 border-primary text-base'
@@ -155,7 +157,9 @@ async function getAboutMe(){
         Error to get data
     </p>
 
-    if(response.length === 0) return <EmptyElementsComponent />
+    if(response.length === 0) return <EmptyListComponent>
+        Without Elements
+    </EmptyListComponent>
 
     return response.map(el => <div
         className='flex justify-between w-4/5 pt-4 pb-2 border-b-2 border-primary text-base'
@@ -199,7 +203,9 @@ async function getExperience(){
         Error to get data
     </p>
 
-    if(response.length === 0) return <EmptyElementsComponent />
+    if(response.length === 0) return <EmptyListComponent>
+        Without Elements
+    </EmptyListComponent>
 
     return response.map(el => <div
         className='flex justify-between w-4/5 pt-4 pb-2 border-b-2 border-primary text-base'
@@ -249,7 +255,9 @@ async function getEducation(){
         Error to get data
     </p>
 
-    if(response.length === 0) return <EmptyElementsComponent />
+    if(response.length === 0) return <EmptyListComponent>
+        Without Elements
+    </EmptyListComponent>
 
     return response.map(el => <div
         className='flex justify-between w-4/5 pt-4 pb-2 border-b-2 border-primary text-base'
