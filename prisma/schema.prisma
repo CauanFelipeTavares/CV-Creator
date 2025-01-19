@@ -24,6 +24,7 @@ model User {
     cv_element_aboutMe             Cv_element_aboutMe[]
     cv_element_experience          Cv_element_experience[]
     cv_element_education           Cv_element_education[]
+    cvs                            Cv[]
 }
 
 model Cv_element_personalInformation {
@@ -40,7 +41,8 @@ model Cv_element_personalInformation {
     github      String?
     website     String?
 
-    user User @relation(fields: [userId], references: [id])
+    user User @relation(fields: [userId], references: [id], onDelete: NoAction)
+    cvs  Cv[]
 }
 
 model Cv_element_aboutMe {
@@ -50,7 +52,8 @@ model Cv_element_aboutMe {
     customId    String @map("custom_id")
     description String
 
-    user User @relation(fields: [userId], references: [id])
+    user User @relation(fields: [userId], references: [id], onDelete: NoAction)
+    cvs  Cv[]
 }
 
 model Cv_element_experience {
@@ -64,7 +67,7 @@ model Cv_element_experience {
     location     String
     description  String
 
-    user User @relation(fields: [userId], references: [id])
+    user User @relation(fields: [userId], references: [id], onDelete: NoAction)
 }
 
 model Cv_element_education {
@@ -78,5 +81,24 @@ model Cv_element_education {
     location     String
     description  String
 
-    user User @relation(fields: [userId], references: [id])
+    user User @relation(fields: [userId], references: [id], onDelete: NoAction)
+}
+
+model Cv {
+    id       String @id @default(uuid()) @db.Uuid()
+    customId String @map("custom_id")
+
+    userId                       String @map("user_id") @db.Uuid
+    personalInformationElementId String @map("personal_information_element_id") @db.Uuid()
+    aboutMeElementId             String @map("about_me_element_id") @db.Uuid()
+    // experienceElementId          String[] @map("experience_element_id") @db.Uuid()
+    // educationElementId           String[] @map("education_element_id") @db.Uuid()
+
+    user                User                           @relation(fields: [userId], references: [id], onDelete: NoAction)
+    personalInformation Cv_element_personalInformation @relation(fields: [personalInformationElementId], references: [id], onDelete: NoAction)
+    aboutMe             Cv_element_aboutMe             @relation(fields: [aboutMeElementId], references: [id], onDelete: NoAction)
+    // Cv_element_experience   Cv_element_experience?         @relation(fields: [cv_element_experienceId], references: [id])
+    // cv_element_experienceId String?                        @db.Uuid
+    // Cv_element_education    Cv_element_education?          @relation(fields: [cv_element_educationId], references: [id])
+    // cv_element_educationId  String?                        @db.Uuid                   @db.Uuid
 }

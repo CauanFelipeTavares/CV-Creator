@@ -1,35 +1,95 @@
 import Button from '@/components/micro/button'
+import { prisma } from '@/lib/db/prisma'
 import Link from 'next/link'
+import CvFormCreate from './_components/CvFormCreate'
 
-export default function CreateCVPage(){
+export default async function CreateCVPage(){
+
+    const [
+        personalInformation,
+        aboutMe,
+        experience,
+        education,
+    ] = await Promise.all([
+        getPersonalInformation(),
+        getAboutMe(),
+        getExperience(),
+        getEducation(),
+    ])
+
+    if(
+        !personalInformation ||
+        !aboutMe ||
+        !experience ||
+        !education
+    ) return <p className='text-red-600'>
+        Error to get data, please reload
+    </p>
 
     return <>
         <div
             className="w-full flex flex-col mx-auto"
         >
-            <h2
-                className='text-lg my-8'
-            >
-                Before create your CV, you can:
-            </h2>
-            <div
-                className='w-full flex gap-8 justify-center'
-            >
-                <Link
-                    href={'/elements/create'}
-                >
-                    <Button>
-                        Create elements
-                    </Button>
-                </Link>
-                <Button>
-                    View template
-                </Button>
-                <Button>
-                    View your CVs
-                </Button>
-            </div>
+            <CvFormCreate
+                key='CvFormCreate'
+                personalInformation={personalInformation}
+                aboutMe={aboutMe}
+                experience={experience}
+                education={education}
+            />
         </div>
     </>
+
+}
+
+async function getPersonalInformation(){
+
+    const response = await prisma.cv_element_personalInformation.findMany({
+        select: {
+            customId: true,
+            id: true
+        }
+    }).catch(() => null)
+
+    return response
+
+}
+
+async function getAboutMe(){
+
+    const response = await prisma.cv_element_aboutMe.findMany({
+        select: {
+            customId: true,
+            id: true
+        }
+    }).catch(() => null)
+
+    return response
+
+}
+
+async function getExperience(){
+
+    const response = await prisma.cv_element_experience.findMany({
+        select: {
+            customId: true,
+            id: true
+        }
+    }).catch(() => null)
+
+    return response
+
+}
+
+async function getEducation(){
+
+    const response = await prisma.cv_element_education.findMany({
+        select: {
+            customId: true,
+            id: true
+        }
+    }).catch(() => null)
+
+    return response
 
 }

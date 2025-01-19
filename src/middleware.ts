@@ -2,22 +2,22 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export default function AuthMiddleware(request: NextRequest){
     
-    const token = 'exists' // localStorage.getItem('jwt_token')
-    const isValidToken = true
+    // const token = 'exists' // localStorage.getItem('jwt_token')
+    // const isValidToken = false
 
-    const publicPaths = [
-        '/signin', '/signup'
-    ]
+    // const publicPaths = [
+    //     '/signin', '/signup'
+    // ]
 
-    if(publicPaths.includes(request.nextUrl.pathname)){
+    // if(publicPaths.includes(request.nextUrl.pathname)){
 
-        if(isValidToken) return NextResponse.redirect(new URL('/', request.url))
+    //     if(isValidToken) return NextResponse.redirect(new URL('/', request.url))
 
-    }else{
+    // }else{
 
-        if(!isValidToken) return NextResponse.redirect(new URL('/signin', request.url))
+    //     if(!isValidToken) return NextResponse.redirect(new URL('/signin', request.url))
 
-    }
+    // }
 
     return NextResponse.next()
 

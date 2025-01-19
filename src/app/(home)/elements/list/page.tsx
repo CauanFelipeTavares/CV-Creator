@@ -6,10 +6,17 @@ import { PopupAboutMe, PopupEducation, PopupExperience, PopupPersonalInformation
 
 export default async function ElementListPage(){
 
-    const personalInformation = await getPersonalInformation()
-    const aboutMe = await getAboutMe()
-    const experience = await getExperience()
-    const education = await getEducation()
+    const [
+        personalInformation,
+        aboutMe,
+        experience,
+        education,
+    ] = await Promise.all([
+        getPersonalInformation(),
+        getAboutMe(),
+        getExperience(),
+        getEducation(),
+    ])
 
     return <>
         <div
