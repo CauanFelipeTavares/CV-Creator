@@ -24,7 +24,7 @@ export default async function CVListPage(){
             className='w-full flex justify-between p-4 bg-thirth border-primary border-2 rounded-lg my-2'
         >
             <p>
-                { cv.customId }
+                { cv.customId } { cv.id }
             </p>
             <div
                 className='flex gap-2'
