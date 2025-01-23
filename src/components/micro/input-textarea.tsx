@@ -1,14 +1,16 @@
 import { ComponentProps } from 'react'
 
-// interface IInputTextProps extends ComponentProps<'input'> {}
+interface ITextareaProps extends ComponentProps<'textarea'> {
+    name: string
+}
 
 export default function Textarea({
     ...props
-}: ComponentProps<'textarea'> ){
+}: ITextareaProps ){
 
     return <textarea
         {...props}
-        className={`bg-blue-800 w-full p-2 rounded-md text-left ${props.className}`}
+        className={`bg-secundary w-full p-2 rounded-md text-left border-primary border-2 ${props.className}`}
     />
 
 }

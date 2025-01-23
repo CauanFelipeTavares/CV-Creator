@@ -1,7 +1,11 @@
 import { ComponentProps } from 'react'
 
 interface ISelectProps extends ComponentProps<'select'> {
-    options: string[]
+    name: string
+    options: {
+        value: string
+        title: string
+    }[]
 }
 
 export default function Select({
@@ -11,14 +15,15 @@ export default function Select({
 
     return <select
         {...props}
-        className={`bg-blue-800 w-full p-2 rounded-md text-left ${props.className}`}
+        className={`bg-secundary w-full p-2 rounded-md text-left border-primary border-2 ${props.className}`}
     >
         {
             options.map(opt => <option
-                key={opt}
+                key={opt.value}
+                value={opt.value}
                 className='text-left'
             >
-                { opt }
+                { opt.title }
             </option>)
         }
     </select>

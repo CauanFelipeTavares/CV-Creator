@@ -1,65 +1,15 @@
-import Button from '@/components/micro/button'
+'use client'
+
+export type ElementOption = 'personalInformation' | 'aboutMe' | 'experience' | 'education'
+
 import Datetime from '@/components/micro/input-datetime'
-import Select from '@/components/micro/input-select'
 import InputText from '@/components/micro/input-text'
 import Textarea from '@/components/micro/input-textarea'
 
-export default function CreateCVElementPage(){
-
-    const formOptions = {
-        personalInformation: PersonalInformationForm,
-        aboutMe: AboutMeForm,
-        experience: ExperienceForm,
-        education: EducationForm,
-    }
-
+export function AboutMeForm({ inputData }: { inputData: any }){
+    
     return <>
-        <div
-            className="w-full flex flex-col mx-auto"
-        >
-            <h2
-                className='text-lg my-8'
-            >
-                Create a new element to mount your CV
-            </h2>
-            <div
-                className='w-full flex gap-4 mb-4 justify-center'
-            >
-                <div
-                    className='flex flex-col w-2/5'
-                >
-                    <label
-                        className='text-left'
-                    >
-                        Element Type:
-                    </label>
-                    <Select 
-                        options={[
-                            'Personal information',
-                            'About Me',
-                            'Experience',
-                            'Education/Certifications'
-                        ]}
-                    />
-                </div>
-                <div className='w-2/5' />
-            </div>
-            { formOptions.education() }
-            <Button
-                className='w-1/5 mt-8 ml-auto mr-[10%]'
-            >
-                Create Element
-            </Button>
-        </div>
-    </>
-
-}
-
-function AboutMeForm(){
-
-    return <div
-        className='flex flex-col gap-8 justify-center mt-8'
-    >
+        <input type='hidden' name='tableId' value='aboutMe' />
         <div
             className='flex justify-center gap-4'
         >
@@ -69,10 +19,13 @@ function AboutMeForm(){
                 <label
                     className='w-full text-left'
                 >
-                    Experience ID*
+                    About Me ID*
                 </label>
                 <InputText
+                    name='customId'
                     placeholder='Identifier on elements list'
+                    defaultValue={inputData['customId']}
+                    onChange={(ev) => inputData['customId'] = ev.target.value}
                 />
             </div>
             <div
@@ -89,18 +42,20 @@ function AboutMeForm(){
                 Description *
             </label>
             <Textarea
+                name='description'
+                defaultValue={inputData['description']}
+                onChange={(ev) => inputData['description'] = ev.target.value}
                 rows={5}
             />
         </div>
-    </div>
+    </>
 
 }
 
-function PersonalInformationForm(){
+export function PersonalInformationForm({ inputData }: { inputData: any }){
 
-    return <div
-        className='flex flex-col gap-8 justify-center mt-8'
-    >
+    return <>
+        <input type='hidden' name='tableId' value='personalInformation' />
         <div
             className='flex justify-center gap-4'
         >
@@ -113,7 +68,10 @@ function PersonalInformationForm(){
                     Personal Information ID*
                 </label>
                 <InputText
+                    name='customId'
                     placeholder='Identifier on elements list'
+                    defaultValue={inputData['customId']}
+                    onChange={(ev) => inputData['customId'] = ev.target.value}
                 />
             </div>
             <div
@@ -125,7 +83,10 @@ function PersonalInformationForm(){
                     Your Name*
                 </label>
                 <InputText
+                    name='name'
                     placeholder='Ex: Cauan Felipe Tavares'
+                    defaultValue={inputData['name']}
+                    onChange={(ev) => inputData['name'] = ev.target.value}
                 />
             </div>
         </div>
@@ -142,7 +103,10 @@ function PersonalInformationForm(){
                     Job Title *
                 </label>
                 <InputText
+                    name='jobTitle'
                     placeholder='Ex: Full Stack Developer'
+                    defaultValue={inputData['jobTitle']}
+                    onChange={(ev) => inputData['jobTitle'] = ev.target.value}
                 />
             </div>
             <div
@@ -154,7 +118,10 @@ function PersonalInformationForm(){
                     Location *
                 </label>
                 <InputText
+                    name='location'
                     placeholder='Ex: Rio de Janeiro, Brazil'
+                    defaultValue={inputData['location']}
+                    onChange={(ev) => inputData['location'] = ev.target.value}
                 />
             </div>
         </div>
@@ -171,6 +138,9 @@ function PersonalInformationForm(){
                     Email
                 </label>
                 <InputText
+                    name='email'
+                    defaultValue={inputData['email']}
+                    onChange={(ev) => inputData['email'] = ev.target.value}
                     placeholder='Ex: codesotech@gmail.com'
                 />
             </div>
@@ -183,6 +153,9 @@ function PersonalInformationForm(){
                     Phone Number
                 </label>
                 <InputText
+                    name='phoneNumber'
+                    defaultValue={inputData['phoneNumber']}
+                    onChange={(ev) => inputData['phoneNumber'] = ev.target.value}
                     placeholder='Ex: +55 17 99221-9923'
                 />
             </div>
@@ -200,6 +173,9 @@ function PersonalInformationForm(){
                     LinkedIn URL
                 </label>
                 <InputText
+                    name='linkedin'
+                    defaultValue={inputData['linkedin']}
+                    onChange={(ev) => inputData['linkedin'] = ev.target.value}
                     placeholder='Ex: https://www.linkedin.com/in/cauantavares/'
                 />
             </div>
@@ -212,6 +188,9 @@ function PersonalInformationForm(){
                     Github URL
                 </label>
                 <InputText
+                    name='github'
+                    defaultValue={inputData['github']}
+                    onChange={(ev) => inputData['github'] = ev.target.value}
                     placeholder='Ex: https://github.com/CauanFelipeTavares'
                 />
             </div>
@@ -229,20 +208,22 @@ function PersonalInformationForm(){
                     Website *
                 </label>
                 <InputText
+                    name='website'
+                    defaultValue={inputData['website']}
+                    onChange={(ev) => inputData['website'] = ev.target.value}
                     placeholder='Ex: https://codeso.dev/about'
                 />
             </div>
             <div className='w-2/5 min-w-40' />
         </div>
-    </div>
+    </>
 
 }
 
-function ExperienceForm(){
+export function ExperienceForm({ inputData }: { inputData: any }){
 
-    return <div
-        className='flex flex-col gap-8 justify-center mt-8'
-    >
+    return <>
+        <input type='hidden' name='tableId' value='experience' />
         <div
             className='flex justify-center gap-4'
         >
@@ -255,6 +236,9 @@ function ExperienceForm(){
                     Experience ID*
                 </label>
                 <InputText
+                    name='customId'
+                    defaultValue={inputData['customId']}
+                    onChange={(ev) => inputData['customId'] = ev.target.value}
                     placeholder='Identifier on elements list'
                 />
             </div>
@@ -267,6 +251,9 @@ function ExperienceForm(){
                     Experience Name*
                 </label>
                 <InputText
+                    name='name'
+                    defaultValue={inputData['name']}
+                    onChange={(ev) => inputData['name'] = ev.target.value}
                     placeholder='Ex: Full Stack Developer'
                 />
             </div>
@@ -283,7 +270,10 @@ function ExperienceForm(){
                 >
                     Start Period*
                 </label>
-                <Datetime/>
+                <Datetime
+                    name='startPeriod'
+                    defaultValue={inputData['startPeriod']}
+                    onChange={(ev) => inputData['startPeriod'] = ev.target.value}/>
             </div>
             <div
                 className='flex w-2/5 flex-col items-center min-w-40'
@@ -293,7 +283,10 @@ function ExperienceForm(){
                 >
                     Finish Period*
                 </label>
-                <Datetime/>
+                <Datetime
+                    name='finishPeriod'
+                    defaultValue={inputData['finishPeriod']}
+                    onChange={(ev) => inputData['finishPeriod'] = ev.target.value}/>
                 <p
                     className='block mr-auto'
                 >
@@ -311,9 +304,12 @@ function ExperienceForm(){
                 <label
                     className='w-full text-left'
                 >
-                    Local *
+                    Location*
                 </label>
                 <InputText
+                    name='location'
+                    defaultValue={inputData['location']}
+                    onChange={(ev) => inputData['location'] = ev.target.value}
                     placeholder='Ex: Rio de Janeiro (Brazil)'
                 />
                 <p
@@ -334,18 +330,20 @@ function ExperienceForm(){
                 Description *
             </label>
             <Textarea
+                name='description'
+                defaultValue={inputData['description']}
+                onChange={(ev) => inputData['description'] = ev.target.value}
                 rows={5}
             />
         </div>
-    </div>
+    </>
 
 }
 
-function EducationForm(){
+export function EducationForm({ inputData }: { inputData: any }){
 
-    return <div
-        className='flex flex-col gap-8 justify-center mt-8'
-    >
+    return <>
+        <input type='hidden' name='tableId' value='education' />
         <div
             className='flex justify-center gap-4'
         >
@@ -358,6 +356,9 @@ function EducationForm(){
                     Education ID*
                 </label>
                 <InputText
+                    name='customId'
+                    defaultValue={inputData['customId']}
+                    onChange={(ev) => inputData['customId'] = ev.target.value}
                     placeholder='Identifier on elements list'
                 />
             </div>
@@ -370,6 +371,9 @@ function EducationForm(){
                     Education Name*
                 </label>
                 <InputText
+                    name='name'
+                    defaultValue={inputData['name']}
+                    onChange={(ev) => inputData['name'] = ev.target.value}
                     placeholder='Ex: Full Stack Developer'
                 />
             </div>
@@ -386,7 +390,10 @@ function EducationForm(){
                 >
                     Start Period*
                 </label>
-                <Datetime/>
+                <Datetime
+                    name='startPeriod'
+                    defaultValue={inputData['startPeriod']}
+                    onChange={(ev) => inputData['startPeriod'] = ev.target.value}/>
             </div>
             <div
                 className='flex w-2/5 flex-col items-center min-w-40'
@@ -396,7 +403,10 @@ function EducationForm(){
                 >
                     Finish Period*
                 </label>
-                <Datetime/>
+                <Datetime
+                    name='finishPeriod'
+                    defaultValue={inputData['finishPeriod']}
+                    onChange={(ev) => inputData['finishPeriod'] = ev.target.value}/>
             </div>
         </div>
 
@@ -409,9 +419,12 @@ function EducationForm(){
                 <label
                     className='w-full text-left'
                 >
-                    Local *
+                    Location
                 </label>
                 <InputText
+                    name='location'
+                    defaultValue={inputData['location']}
+                    onChange={(ev) => inputData['location'] = ev.target.value}
                     placeholder='Ex: Rio de Janeiro (Brazil)'
                 />
                 <p
@@ -432,9 +445,12 @@ function EducationForm(){
                 Description *
             </label>
             <Textarea
+                name='description'
+                defaultValue={inputData['description']}
+                onChange={(ev) => inputData['description'] = ev.target.value}
                 rows={5}
             />
         </div>
-    </div>
+    </>
 
 }

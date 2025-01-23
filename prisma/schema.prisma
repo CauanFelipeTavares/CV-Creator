@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
+    directUrl = env("DIRECT_URL")
+}
+
+model User {
+    id        String    @id @default(uuid()) @db.Uuid
+    name      String
+    email     String    @unique
+    password  String
+    createdAt DateTime? @default(now()) @map("created_at")
+
+    cv_element_personalInformation Cv_element_personalInformation[]
+    cv_element_aboutMe             Cv_element_aboutMe[]
+    cv_element_experience          Cv_element_experience[]
+    cv_element_education           Cv_element_education[]
+    cvs                            Cv[]
+}
+
+model Cv_element_personalInformation {
+    id     String @id @default(uuid()) @db.Uuid
+    userId String @map("user_id") @db.Uuid
+
+    customId    String  @map("custom_id")
+    name        String
+    jobTitle    String  @map("job_title")
+    location    String
+    email       String
+    phoneNumber String  @map("phone_number")
+    linkedin    String?
+    github      String?
+    website     String?
+
+    user User @relation(fields: [userId], references: [id], onDelete: NoAction)
+    cvs  Cv[]
+}
+
+model Cv_element_aboutMe {
+    id     String @id @default(uuid()) @db.Uuid
+    userId String @map("user_id") @db.Uuid
+
+    customId    String @map("custom_id")
+    description String
+
+    user User @relation(fields: [userId], references: [id], onDelete: NoAction)
+    cvs  Cv[]
+}
+
+model Cv_element_experience {
+    id     String @id @default(uuid()) @db.Uuid
+    userId String @map("user_id") @db.Uuid
+
+    customId     String @map("custom_id")
+    name         String
+    startPeriod  String @map("start_period")
+    finishPeriod String @map("finish_period")
+    location     String
+    description  String
+
+    user User @relation(fields: [userId], references: [id], onDelete: NoAction)
+}
+
+model Cv_element_education {
+    id     String @id @default(uuid()) @db.Uuid
+    userId String @map("user_id") @db.Uuid
+
+    customId     String @map("custom_id")
+    name         String
+    startPeriod  String @map("start_period")
+    finishPeriod String @map("finish_period")
+    location     String
+    description  String
+
+    user User @relation(fields: [userId], references: [id], onDelete: NoAction)
+}
+
+model Cv {
+    id       String @id @default(uuid()) @db.Uuid()
+    customId String @map("custom_id")
+
+    userId                       String @map("user_id") @db.Uuid
+    personalInformationElementId String @map("personal_information_element_id") @db.Uuid()
+    aboutMeElementId             String @map("about_me_element_id") @db.Uuid()
+    // experienceElementId          String[] @map("experience_element_id") @db.Uuid()
+    // educationElementId           String[] @map("education_element_id") @db.Uuid()
+
+    user                User                           @relation(fields: [userId], references: [id], onDelete: NoAction)
+    personalInformation Cv_element_personalInformation @relation(fields: [personalInformationElementId], references: [id], onDelete: NoAction)
+    aboutMe             Cv_element_aboutMe             @relation(fields: [aboutMeElementId], references: [id], onDelete: NoAction)
+    // Cv_element_experience   Cv_element_experience?         @relation(fields: [cv_element_experienceId], references: [id])
+    // cv_element_experienceId String?                        @db.Uuid
+    // Cv_element_education    Cv_element_education?          @relation(fields: [cv_element_educationId], references: [id])
+    // cv_element_educationId  String?                        @db.Uuid                   @db.Uuid
+}
