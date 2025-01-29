@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/db/prisma'
 import EmptyListComponent from '../../_components/EmptyListComponent'
+import { OptionsListComponent } from './_components/Options'
 
 export default async function CVListPage(){
 
@@ -29,15 +30,7 @@ export default async function CVListPage(){
             <div
                 className='flex gap-2'
             >
-                <p>
-                    Download PDF
-                </p>
-                <p>
-                    Update
-                </p>
-                <p>
-                    Delete
-                </p>
+                <OptionsListComponent id={cv.id} />
             </div>
         </div>)
 

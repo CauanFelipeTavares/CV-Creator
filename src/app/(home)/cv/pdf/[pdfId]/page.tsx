@@ -42,7 +42,7 @@ const pdfStyles = StyleSheet.create({
     text: {
         fontSize: 12,
         marginVertical: 2,
-        fontFamily: 'asd',
+        // fontFamily: 'asd',
     },
     title: {
         color: '#3535BF',

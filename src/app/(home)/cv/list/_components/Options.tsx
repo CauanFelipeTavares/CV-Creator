@@ -1,18 +1,30 @@
 'use client'
 
-import Button from "@/components/micro/button"
-import Link from "next/link"
+import { useRouter } from 'next/navigation'
 
-export default function OptionsListComponent(){
+interface IOptionsList {
+    id: string
+}
 
-    return <div>
-        <Link
-            href={'/elements/list'}
+export function OptionsListComponent({
+    id
+}: IOptionsList){
+
+    const router = useRouter()
+
+    return <>
+        <p 
+            onClick={() => router.push(`/cv/pdf/${id}`)}
+            className='cursor-pointer'
         >
-            <Button>
-                List Elements
-            </Button>
-        </Link>
-    </div>
+            Show PDF
+        </p>
+        <p>
+            Update
+        </p>
+        <p>
+            Delete
+        </p>
+    </>
 
 }
