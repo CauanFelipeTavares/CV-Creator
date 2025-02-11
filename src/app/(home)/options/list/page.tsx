@@ -9,15 +9,21 @@ export default function OptionsCreatePage(){
     >
         <Link
             href='/cv/list'
-            className='flex justify-center content-center w-2/5 h-full p-6 rounded-lg border-primary border-2'
+            className='bg-white flex flex-col justify-center content-center w-2/5 h-full p-6 rounded-lg border-primary shadow-md border-[1px]'
         >
-            Show your CVs
+            <h3 className='text-lg mb-4 font-semibold'>
+                Show your CVs
+            </h3>
+            <img src='/img/illustration-cv.jpg' className='h-3/5 w-auto' alt='' />
         </Link>
         <Link
             href='/elements/list'
-            className='flex justify-center content-center w-2/5 h-full p-6 rounded-lg border-primary border-2'
+            className='bg-white flex flex-col justify-center content-center w-2/5 h-full p-6 rounded-lg border-primary shadow-md border-[1px]'
         >
-            Show your elements
+            <h3 className='text-lg mb-4 font-semibold'>
+                Show your elements
+            </h3>
+            <img src='/img/illustration-elements.jpg' className='h-3/5 w-auto' alt='' />
         </Link>
     </div>
 

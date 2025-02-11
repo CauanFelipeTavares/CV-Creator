@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation'
 import { AboutMeForm, EducationForm, ElementOption, ExperienceForm, PersonalInformationForm } from '../_components/ElementsForm'
 import { useActionState, useRef, useState } from 'react'
 import Select from '@/components/micro/input-select'
-// import Button from '@/components/micro/button'
+import Button from '@/components/micro/button'
 import { IActionResponse } from '@/lib/utils/response'
-import { Button } from '@/components/ui/button'
+// import { Button } from '@/components/ui/button'
 
 type SubmitActionType = (formData: FormData) => Promise<IActionResponse>
 
@@ -77,7 +77,6 @@ export default function ElementForm({
             <Button
                 className='w-1/4 mt-2 ml-auto mr-[10%]'
                 disabled={isPending}
-                variant={'outline'}
             >
                 Create Element
             </Button>

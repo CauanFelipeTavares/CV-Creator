@@ -19,54 +19,54 @@ export default async function ElementListPage(){
     ])
 
     return <>
-        <div
-            className='flex flex-col items-center'
+        <h1
+            className='text-xl font-semibold my-4'
         >
-            <h1
-                className='text-xl my-4'
-            >
-                Look your elements
-            </h1>
+            Your Elements
+        </h1>
+        <div
+            className='flex justify-center gap-4'
+        >
 
             <div
                 key='personalInformation'
-                className='flex flex-col w-4/5 items-center bg-secundary border-primary border-2 my-2 py-4 rounded-lg'
+                className='flex flex-col w-2/5 min-w-[300px] items-center bg-secundary shadow-md border-[1px] border-primary my-2 py-4 rounded-lg'
             >
                 <h2
-                    className='text-left w-4/5 mb-2 text-lg'
+                    className='text-left w-4/5 mb-2 text-lg font-semibold'
                 >
                     Personal Information
                 </h2>
                 { personalInformation }
             </div>
             <div
-                className='flex flex-col w-4/5 items-center bg-secundary border-primary border-2 my-2 py-4 rounded-lg'
+                className='flex flex-col w-2/5 min-w-[300px] items-center bg-secundary shadow-md border-[1px] border-primary my-2 py-4 rounded-lg'
                 key='aboutMe'
             >
                 <h2
-                    className='text-left w-4/5 my-2 text-lg'
+                    className='text-left w-4/5 mb-2 text-lg font-semibold'
                 >
                     About Me 
                 </h2>
                 { aboutMe }
             </div>
             <div
-                className='flex flex-col w-4/5 items-center bg-secundary border-primary border-2 my-2 py-4 rounded-lg'
+                className='flex flex-col w-2/5 min-w-[300px] items-center bg-secundary shadow-md border-[1px] border-primary my-2 py-4 rounded-lg'
                 key='experience'
             >
                 <h2
-                    className='text-left w-4/5 mb-2 text-lg'
+                    className='text-left w-4/5 mb-2 text-lg font-semibold'
                 >
                     Experience
                 </h2>
                 { experience }
             </div>
             <div
-                className='flex flex-col w-4/5 items-center bg-secundary border-primary border-2 my-2 py-4 rounded-lg'
+                className='flex flex-col w-2/5 min-w-[300px] items-center bg-secundary shadow-md border-[1px] border-primary my-2 py-4 rounded-lg'
                 key='education'
             >
                 <h2
-                    className='text-left w-4/5 mb-2 text-lg'
+                    className='text-left w-4/5 mb-2 text-lg font-semibold'
                 >
                     Education/Certificates
                 </h2>
@@ -105,7 +105,7 @@ async function getPersonalInformation(){
     </EmptyListComponent>
 
     return response.map(el => <div
-        className='flex justify-between w-4/5 pt-4 pb-2 border-b-2 border-primary text-base'
+        className='flex justify-between w-4/5 pt-4 pb-2 border-b-[1px] border-primary text-base'
     >
         <p>
             { el.customId }
@@ -162,7 +162,7 @@ async function getAboutMe(){
     </EmptyListComponent>
 
     return response.map(el => <div
-        className='flex justify-between w-4/5 pt-4 pb-2 border-b-2 border-primary text-base'
+        className='flex justify-between w-4/5 pt-4 pb-2 border-b-[1px] border-primary text-base'
     >
         <p>
             { el.customId }
@@ -208,7 +208,7 @@ async function getExperience(){
     </EmptyListComponent>
 
     return response.map(el => <div
-        className='flex justify-between w-4/5 pt-4 pb-2 border-b-2 border-primary text-base'
+        className='flex justify-between w-4/5 pt-4 pb-2 border-b-[1px] border-primary text-base'
     >
         <p>
             { el.customId }
@@ -260,7 +260,7 @@ async function getEducation(){
     </EmptyListComponent>
 
     return response.map(el => <div
-        className='flex justify-between w-4/5 pt-4 pb-2 border-b-2 border-primary text-base'
+        className='flex justify-between w-4/5 pt-4 pb-2 border-b-[1px] border-primary text-base'
     >
         <p>
             { el.customId }

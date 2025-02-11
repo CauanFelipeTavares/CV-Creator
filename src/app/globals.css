@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-    --background-primary: #ddd;
-    --background-secundary: #eee;
-    --background-thirth: #ccc;
+    --background-primary: rgb(245, 245, 245);
+    --background-secundary: rgb(233, 235, 240);
+    --background-thirth: rgb(220, 222, 227);
 
     --border-color-primary: #999;
 }

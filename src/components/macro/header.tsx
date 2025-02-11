@@ -22,7 +22,7 @@ export default function Header({
 
     return <header
         {...props}
-        className={`flex justify-around fixed z-30 w-full bg-thirth py-2 bottom-0 left-0 top-auto border-t-2 md:bottom-auto md:top-0 border-primary md:border-b-2 md:border-t-transparent ${props.className}`}
+        className={`flex justify-around fixed z-30 w-full bg-thirth py-2 bottom-0 left-0 top-auto border-t-[1px] md:bottom-auto md:top-0 border-primary md:border-b-[1px] md:border-t-transparent ${props.className}`}
     >
         <Link
             href={'/options/create'}

@@ -11,7 +11,7 @@ export default function InputText({
     return <input
         {...props}
         key={props.name}
-        className={`bg-secundary w-full p-2 rounded-md text-left border-primary border-2 ${props.className}`}
+        className={`bg-secundary w-full p-2 rounded-md text-left border-primary border-[1px] ${props.className}`}
     />
 
 }

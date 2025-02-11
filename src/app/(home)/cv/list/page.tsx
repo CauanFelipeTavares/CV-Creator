@@ -22,10 +22,10 @@ export default async function CVListPage(){
 
         return cvs.map(cv => <div
             key={cv.id}
-            className='w-full flex justify-between p-4 bg-thirth border-primary border-2 rounded-lg my-2'
+            className='w-2/5 flex justify-between p-4 bg-thirth border-primary border-[1px] shadow-md rounded-lg my-2'
         >
             <p>
-                { cv.customId } { cv.id }
+                { cv.customId }
             </p>
             <div
                 className='flex gap-2'
@@ -37,14 +37,14 @@ export default async function CVListPage(){
     }
 
     return <div
-        className='block mx-auto w-3/5'
+        className='block mx-auto w-4/5'
     >
         <h2
-            className='my-8'
+            className='text-2xl font-semibold my-8'
         >
-            Your CVS:
+            Your CVS
         </h2>
-        <div>
+        <div className='flex justify-center gap-4'>
             <CVsList />
         </div>
     </div>

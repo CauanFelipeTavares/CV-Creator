@@ -47,7 +47,7 @@ const pdfStyles = StyleSheet.create({
     title: {
         color: '#3535BF',
         fontSize: 24,
-        fontWeight: 800,
+        fontWeight: 900,
         marginVertical: 8,
     },
     description: {
@@ -143,14 +143,46 @@ export default async function PDFViewPage({
                         <Text style={pdfStyles.title}>
                             Last experiences
                         </Text>
-                        <Text>{ cv.aboutMe.description }</Text>
+                        <View >
+                            <img
+                                style={{}}
+                                src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp5GU8mDqlw8oHhMZvAzag2V7h5Onl-vWmxQ&s'
+                            />
+                            <View >
+                                <Text >
+                                    { 'cv.experience.name' }
+                                </Text>
+                                <Text >
+                                    { 'cv.experience.startPeriod' } / { 'cv.experience.finishPeriod' } / { 'cv.experience.location' }
+                                </Text>
+                                <Text >
+                                    { 'cv.experience.description' }
+                                </Text>
+                            </View>
+                        </View>
                     </View>
                     <View style={pdfStyles.separator} />
                     <View>
                         <Text style={pdfStyles.title}>
                             Education & Certifications
                         </Text>
-                        <Text>{ cv.aboutMe.description }</Text>
+                        <View >
+                            <img
+                                style={{}}
+                                src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp5GU8mDqlw8oHhMZvAzag2V7h5Onl-vWmxQ&s'
+                            />
+                            <View >
+                                <Text >
+                                    { 'cv.education.name' }
+                                </Text>
+                                <Text >
+                                    { 'cv.education.startPeriod' } / { 'cv.education.finishPeriod' } / { 'cv.education.location' }
+                                </Text>
+                                <Text >
+                                    { 'cv.education.description' }
+                                </Text>
+                            </View>
+                        </View>
                     </View>
                 </Page>
             </Document>
