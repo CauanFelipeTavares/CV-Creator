@@ -4,10 +4,13 @@ import { prisma } from '@/lib/db/prisma'
 import { IActionResponse } from '@/lib/utils/response'
 import { z } from 'zod'
 
-export default async function createCV(
+export default async function createOrUpdateCV(
     customId: string,
     personalInformationElementId: string,
     aboutMeElementId: string,
+    selectedExperienceIds: string[],
+    selectEducationIds: string[],
+    cvId?: string
 ): Promise<IActionResponse> {
 
     const customIDSchema = z.string().min(2, 'CV Name need in the min 2 characteres')
@@ -19,12 +22,40 @@ export default async function createCV(
         msg: zodValidator.error.issues[0].message
     }
 
-    await prisma.cv.create({
-        data: {
-            customId, aboutMeElementId, personalInformationElementId,
-            userId: process.env.ROOT_USER_ID
-        }
-    })
+    cvId
+        ? await prisma.cv.update({ where: { id: cvId, userId: process.env.ROOT_USER_ID }, 
+            data: {
+                customId,
+                aboutMeElementId,
+                personalInformationElementId,
+                CvExperiences: {
+                    deleteMany: {},
+                    createMany: {
+                        data: selectedExperienceIds.map(experienceId => ({ experienceId }))
+                    }
+                },
+                CvEducations: {
+                    deleteMany: {},
+                    createMany: {
+                        data: selectEducationIds.map(educationId => ({ educationId }))
+                    }
+                },
+            } 
+        })
+        : await prisma.cv.create({
+            data: {
+                customId,
+                aboutMeElementId,
+                personalInformationElementId,
+                CvExperiences: {
+                    create: selectedExperienceIds.map(experienceId => ({ experienceId }))
+                },
+                CvEducations: {
+                    create: selectEducationIds.map(educationId => ({ educationId }))
+                },
+                userId: process.env.ROOT_USER_ID
+            }
+        }) 
 
     return { status: 'success' }
 

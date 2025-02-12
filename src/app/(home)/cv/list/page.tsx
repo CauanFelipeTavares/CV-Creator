@@ -1,12 +1,24 @@
 import { prisma } from '@/lib/db/prisma'
 import EmptyListComponent from '../../_components/EmptyListComponent'
 import { OptionsListComponent } from './_components/Options'
+import { IActionResponse } from '@/lib/utils/response'
 
 export default async function CVListPage(){
 
     const cvs = await prisma.cv.findMany({
         where: { userId: process.env.ROOT_USER_ID }
     }).catch(null)
+
+    async function remove(id: string): Promise<IActionResponse>{
+        'use server'
+
+        await prisma.cv.delete({
+            where: { id }
+        })
+
+        return { status: 'success' }
+
+    }
 
     function CVsList(){
 
@@ -30,7 +42,10 @@ export default async function CVListPage(){
             <div
                 className='flex gap-2'
             >
-                <OptionsListComponent id={cv.id} />
+                <OptionsListComponent
+                    id={cv.id}
+                    removeFunction={remove}
+                />
             </div>
         </div>)
 

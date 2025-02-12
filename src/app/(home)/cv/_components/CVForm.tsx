@@ -1,26 +1,38 @@
 'use client'
 
-import Button from '@/components/micro/button';
+import Button from '@/components/micro/button'
 import { Dispatch, RefObject, SetStateAction, useRef, useState } from 'react'
-import createCV from '../_actions';
-import InputText from '@/components/micro/input-text';
+import InputText from '@/components/micro/input-text'
 import { useRouter } from 'next/navigation'
+import createOrUpdateCV from '../create/_actions'
 
 type TDbResponse = {
-    id: string;
-    customId: string;
+    id: string
+    customId: string
 }[]
 
-interface IFormCreateProps {
+interface ICVFormProps {
     personalInformation: TDbResponse
     aboutMe: TDbResponse
     experience: TDbResponse
     education: TDbResponse
+    cv?: {
+        id: string
+        customId: string
+        personalInformationElementId: string
+        aboutMeElementId: string
+        CvExperiences: {
+            experienceId: string
+        }[]
+        CvEducations: {
+            educationId: string
+        }[]
+    }
 }
 
-export default function CvFormCreate({
-    personalInformation, aboutMe, experience, education
-}: IFormCreateProps){
+export default function CVForm({
+    personalInformation, aboutMe, experience, education, cv
+}: ICVFormProps){
 
     const router = useRouter()
 
@@ -29,11 +41,11 @@ export default function CvFormCreate({
 
     const [loading, setLoading] = useState(false)
 
-    const [selectedPersonalInformationId, setSelectedPersonalInformationId] = useState('')
-    const [selectedAboutMeId, setSelectedAboutMeId] = useState('')
-    const [selectedExperienceIds, setSelectedExperienceIds] = useState<string[]>([])
-    const [selectEducationIds, setSelectEducationIds] = useState<string[]>([])
-    const customId = useRef('')
+    const [selectedPersonalInformationId, setSelectedPersonalInformationId] = useState(cv?.personalInformationElementId || '')
+    const [selectedAboutMeId, setSelectedAboutMeId] = useState(cv?.aboutMeElementId || '')
+    const [selectedExperienceIds, setSelectedExperienceIds] = useState<string[]>(cv?.CvExperiences?.map(exp => exp.experienceId) || [])
+    const [selectEducationIds, setSelectEducationIds] = useState<string[]>(cv?.CvEducations?.map(educ => educ.educationId) || [])
+    const customId = useRef(cv?.customId || '')
 
     const selects = [
         selectedPersonalInformationId,
@@ -80,8 +92,13 @@ export default function CvFormCreate({
 
             setLoading(true)
 
-            const response = await createCV(
-                customId.current, selectedPersonalInformationId, selectedAboutMeId
+            const response = await createOrUpdateCV(
+                customId.current,
+                selectedPersonalInformationId,
+                selectedAboutMeId,
+                selectedExperienceIds,
+                selectEducationIds,
+                cv?.id
             )
 
             response.status == 'success'
@@ -115,8 +132,10 @@ export default function CvFormCreate({
             >
                 {
                     step >= views.length - 1
-                        ? 'Create CV'
-                        : 'Confirm choose'
+                        ? cv?.id 
+                            ? 'Update CV'
+                            : 'Create CV'
+                                : 'Confirm choose'
                 }
             </Button>
         </div>
@@ -215,7 +234,7 @@ function FinishCreation({
 function FormPersonalInformation({
     formData, selectedId, setSelectedId
 }: {
-    formData: TDbResponse,
+    formData: TDbResponse
     selectedId: string
     setSelectedId: Dispatch<SetStateAction<string>>
 }){
@@ -292,7 +311,6 @@ function FormExperience({
             Choose your Experiences
         </h2>
         <div
-            key='FormExperience'
             className='block mx-auto w-full'
         >
             {
@@ -330,7 +348,6 @@ function FormEducation({
             Choose your Education
         </h2>
         <div
-            key='FormEducation'
             className='block mx-auto w-full'
         >
             {

@@ -1,4 +1,5 @@
 import { ComponentProps } from 'react'
+import { mergeStyles } from '@/lib/utils/style'
 
 interface ISelectProps extends ComponentProps<'select'> {
     name: string
@@ -15,7 +16,7 @@ export default function Select({
 
     return <select
         {...props}
-        className={`bg-secundary w-full p-2 rounded-md text-left border-primary border-[1px] ${props.className}`}
+        className={mergeStyles('bg-secundary w-full p-2 rounded-md text-left border-primary border-[1px]', props.className)}
     >
         {
             options.map(opt => <option

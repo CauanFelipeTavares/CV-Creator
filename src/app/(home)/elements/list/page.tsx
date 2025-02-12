@@ -27,9 +27,7 @@ export default async function ElementListPage(){
         <div
             className='flex justify-center gap-4'
         >
-
             <div
-                key='personalInformation'
                 className='flex flex-col w-2/5 min-w-[300px] items-center bg-secundary shadow-md border-[1px] border-primary my-2 py-4 rounded-lg'
             >
                 <h2
@@ -41,7 +39,6 @@ export default async function ElementListPage(){
             </div>
             <div
                 className='flex flex-col w-2/5 min-w-[300px] items-center bg-secundary shadow-md border-[1px] border-primary my-2 py-4 rounded-lg'
-                key='aboutMe'
             >
                 <h2
                     className='text-left w-4/5 mb-2 text-lg font-semibold'
@@ -52,7 +49,6 @@ export default async function ElementListPage(){
             </div>
             <div
                 className='flex flex-col w-2/5 min-w-[300px] items-center bg-secundary shadow-md border-[1px] border-primary my-2 py-4 rounded-lg'
-                key='experience'
             >
                 <h2
                     className='text-left w-4/5 mb-2 text-lg font-semibold'
@@ -63,7 +59,6 @@ export default async function ElementListPage(){
             </div>
             <div
                 className='flex flex-col w-2/5 min-w-[300px] items-center bg-secundary shadow-md border-[1px] border-primary my-2 py-4 rounded-lg'
-                key='education'
             >
                 <h2
                     className='text-left w-4/5 mb-2 text-lg font-semibold'
@@ -105,6 +100,7 @@ async function getPersonalInformation(){
     </EmptyListComponent>
 
     return response.map(el => <div
+        key={el.id}
         className='flex justify-between w-4/5 pt-4 pb-2 border-b-[1px] border-primary text-base'
     >
         <p>
@@ -162,6 +158,7 @@ async function getAboutMe(){
     </EmptyListComponent>
 
     return response.map(el => <div
+        key={el.id}
         className='flex justify-between w-4/5 pt-4 pb-2 border-b-[1px] border-primary text-base'
     >
         <p>
@@ -208,6 +205,7 @@ async function getExperience(){
     </EmptyListComponent>
 
     return response.map(el => <div
+        key={el.id}
         className='flex justify-between w-4/5 pt-4 pb-2 border-b-[1px] border-primary text-base'
     >
         <p>
@@ -260,6 +258,7 @@ async function getEducation(){
     </EmptyListComponent>
 
     return response.map(el => <div
+        key={el.id}
         className='flex justify-between w-4/5 pt-4 pb-2 border-b-[1px] border-primary text-base'
     >
         <p>

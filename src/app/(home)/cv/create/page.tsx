@@ -1,7 +1,5 @@
-import Button from '@/components/micro/button'
-import { prisma } from '@/lib/db/prisma'
-import Link from 'next/link'
-import CvFormCreate from './_components/CvFormCreate'
+import CVForm from '../_components/CVForm'
+import { getAboutMe, getEducation, getExperience, getPersonalInformation } from '../dbGet'
 
 export default async function CreateCVPage(){
 
@@ -27,11 +25,8 @@ export default async function CreateCVPage(){
     </p>
 
     return <>
-        <div
-            className="w-full flex flex-col mx-auto"
-        >
-            <CvFormCreate
-                key='CvFormCreate'
+        <div className='w-full flex flex-col mx-auto'>
+            <CVForm
                 personalInformation={personalInformation}
                 aboutMe={aboutMe}
                 experience={experience}
@@ -39,57 +34,5 @@ export default async function CreateCVPage(){
             />
         </div>
     </>
-
-}
-
-async function getPersonalInformation(){
-
-    const response = await prisma.cv_element_personalInformation.findMany({
-        select: {
-            customId: true,
-            id: true
-        }
-    }).catch(() => null)
-
-    return response
-
-}
-
-async function getAboutMe(){
-
-    const response = await prisma.cv_element_aboutMe.findMany({
-        select: {
-            customId: true,
-            id: true
-        }
-    }).catch(() => null)
-
-    return response
-
-}
-
-async function getExperience(){
-
-    const response = await prisma.cv_element_experience.findMany({
-        select: {
-            customId: true,
-            id: true
-        }
-    }).catch(() => null)
-
-    return response
-
-}
-
-async function getEducation(){
-
-    const response = await prisma.cv_element_education.findMany({
-        select: {
-            customId: true,
-            id: true
-        }
-    }).catch(() => null)
-
-    return response
 
 }
